@@ -1,4 +1,4 @@
-import ListService from './list.service.js'
+import ListService from '../services/listService.js'
 
 class ListController {
   

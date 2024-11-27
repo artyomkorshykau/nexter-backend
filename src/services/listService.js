@@ -1,4 +1,4 @@
-import List from './list.schema.js'
+import List from './src/models/list.schema.js'
 
 class ListService {
   
