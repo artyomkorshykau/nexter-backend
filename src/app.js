@@ -1,28 +1,47 @@
 import express from 'express'
-import mongoose from 'mongoose'
-import listRoutes from './routes/listRoutes.js'
+import { connect } from 'mongoose'
+import dotenv from 'dotenv'
+import listRouter from './routes/listRoutes.js'
+import authRouter from './routes/authRoutes.js'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import userRouter from './routes/userRoutes.js'
+import { errorMiddleware } from './middlewares/errorMiddleware.js'
 
 const app = express()
 
-app.use( express.json() )
-app.use( '/api', listRoutes )
+dotenv.config()
 
-async function server() {
+app.use( express.json() )
+app.use( cookieParser() )
+app.use( cors() )
+
+app.use( '/api/list', listRouter )
+app.use( '/api/auth', authRouter )
+app.use( '/api/user', userRouter )
+
+app.use( errorMiddleware )
+
+const serverApp = async() => {
   
   try {
     
-    await mongoose.connect( process.env.DATABASE_URL )
+    await connect( process.env.DB_URL )
+      .then( () => 'MongoDB is connected!' )
+      .catch( ( err ) => 'MongoDB connected error' )
     
-    app.listen( process.env.PORT, () => {
-      console.log( `Server will be starting on PORT: ${ process.env.PORT }` )
+    app.listen( process.env.PORT || 5000, () => {
+      
+      console.log( `--------- SERVER START ON PORT: ${ process.env.PORT } ---------` )
+      
     } )
     
   } catch ( error ) {
     
-    console.log( error )
+    console.log( 'ERROR STARTING SERVER!!!' )
     
   }
   
 }
 
-server()
+serverApp()

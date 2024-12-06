@@ -1,9 +1,11 @@
-import mongoose from 'mongoose'
+import { Schema, model } from 'mongoose'
+import { Task } from './Task.js'
 
-const List = new mongoose.Schema( {
+const List = new Schema( {
   
-  title: { type: String, required: true }
+  title: { type: String, required: true },
+  tasks: [ Task ]
   
 } )
 
-export default mongoose.model( 'List', List )
+export default model( 'List', List )

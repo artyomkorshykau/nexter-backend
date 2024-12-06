@@ -1,12 +1,13 @@
 import Router from 'express'
 import ListController from '../controllers/listController.js'
+import authMiddleware from '../middlewares/authMiddleware.js'
 
-const listRoutes = new Router()
+const listRouter = new Router()
 
-listRoutes.post( '/create-list', ListController.crateList )
-listRoutes.get( '/lists', ListController.getLists )
-listRoutes.get( '/list/:id', ListController.getListById )
-listRoutes.put( '/list', ListController.updateListById )
-listRoutes.delete( '/list/:id', ListController.deleteListById )
+listRouter.post( '/create', authMiddleware, ListController.crateList )
+listRouter.get( '/all', authMiddleware, ListController.getLists )
+listRouter.get( '/:id', authMiddleware, ListController.getListById )
+listRouter.put( '/update', authMiddleware, ListController.updateListById )
+listRouter.delete( '/:id', authMiddleware, ListController.deleteListById )
 
-export default listRoutes
+export default listRouter

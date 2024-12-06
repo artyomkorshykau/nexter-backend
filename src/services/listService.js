@@ -1,8 +1,11 @@
-import List from './src/models/list.schema.js'
+import List from '../models/List.js'
+import ListErrorHandler from '../exceptions/listErrorHandler.js'
 
 class ListService {
   
   async crateList( title ) {
+    
+    if ( title.trim().length === 0 ) throw ListErrorHandler.EmptyTitle()
     
     return await List.create( { title } )
     
@@ -16,36 +19,17 @@ class ListService {
   
   async getListById( id ) {
     
-    if ( !id ) {
-      
-      throw new Error( 'ID not specified' )
-      
-    }
-    
     return List.findById( id )
-    
     
   }
   
   async updateListById( id, list ) {
-    
-    if ( !id ) {
-      
-      throw new Error( 'ID not specified' )
-      
-    }
     
     return List.findByIdAndUpdate( id, list, { new: true } )
     
   }
   
   async deleteListById( id ) {
-    
-    if ( !id ) {
-      
-      throw new Error( 'ID not specified' )
-      
-    }
     
     return List.findByIdAndDelete( id )
     
