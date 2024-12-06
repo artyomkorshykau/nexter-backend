@@ -14,7 +14,7 @@ class AuthService {
     const newUser = new User( { username, password: hashPassword } )
     await newUser.save()
     
-    const token = TokenService.generateAccessToken( username )
+    const token = TokenService.generateAccessToken( newUser._id )
     await TokenService.saveToken( newUser._id, token )
     
     return token
@@ -32,7 +32,7 @@ class AuthService {
     const validatePassword = bcrypt.compareSync( password, findUser.password )
     if ( !validatePassword ) throw AuthErrorHandler.IncorrectPassword()
     
-    const token = TokenService.generateAccessToken( username )
+    const token = TokenService.generateAccessToken( findUser._id )
     await TokenService.saveToken( findUser._id, token )
     
     return token

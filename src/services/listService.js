@@ -3,35 +3,35 @@ import ListErrorHandler from '../exceptions/listErrorHandler.js'
 
 class ListService {
   
-  async crateList( title ) {
+  async createList( userID, title ) {
     
     if ( title.trim().length === 0 ) throw ListErrorHandler.EmptyTitle()
     
-    return await List.create( { title } )
+    return await List.create( { userID, title } )
     
   }
   
-  async getLists() {
+  async getLists( userID ) {
     
-    return List.find()
-    
-  }
-  
-  async getListById( id ) {
-    
-    return List.findById( id )
+    return List.find( { userID } ).populate( 'tasks' )
     
   }
   
-  async updateListById( id, list ) {
+  async getListById( userID, id ) {
     
-    return List.findByIdAndUpdate( id, list, { new: true } )
+    return List.findById( userID, id )
     
   }
   
-  async deleteListById( id ) {
+  async updateListById( userID, id, list ) {
     
-    return List.findByIdAndDelete( id )
+    return List.findByIdAndUpdate( userID, id, list, { new: true } )
+    
+  }
+  
+  async deleteListById( userID, id ) {
+    
+    return List.findByIdAndDelete( userID, id )
     
   }
 }

@@ -1,6 +1,7 @@
 import ListService from '../services/listService.js'
 import AuthErrorHandler from '../exceptions/authErrorHandler.js'
 import ListErrorHandler from '../exceptions/listErrorHandler.js'
+import { extractUserIdFromToken } from '../utils/helpers/extractUserIdFromToken.js'
 
 class ListController {
   
@@ -8,7 +9,9 @@ class ListController {
     
     try {
       const { title } = req.body
-      const list = await ListService.crateList( title )
+      const { accessToken } = req.cookies
+      const userID = extractUserIdFromToken( accessToken )
+      const list = await ListService.createList( userID, title )
       
       return res.status( 200 ).json( list )
       
@@ -21,7 +24,9 @@ class ListController {
   async getLists( req, res, next ) {
     
     try {
-      const lists = await ListService.getLists()
+      const { accessToken } = req.cookies
+      const userID = extractUserIdFromToken( accessToken )
+      const lists = await ListService.getLists( userID )
       return res.status( 200 ).json( lists )
       
     } catch ( error ) {
@@ -34,7 +39,9 @@ class ListController {
     
     try {
       const { id } = req.params
-      const listById = await ListService.getListById( id )
+      const { accessToken } = req.cookies
+      const userID = extractUserIdFromToken( accessToken )
+      const listById = await ListService.getListById( userID, id )
       return res.status( 200 ).json( listById )
       
     } catch ( error ) {
@@ -47,7 +54,9 @@ class ListController {
     
     try {
       const list = req.body
-      const updatedList = await ListService.updateListById( list._id, list )
+      const { accessToken } = req.cookies
+      const userID = extractUserIdFromToken( accessToken )
+      const updatedList = await ListService.updateListById( userID, list._id, list )
       return res.status( 200 ).json( updatedList )
       
     } catch ( error ) {
@@ -60,7 +69,9 @@ class ListController {
     
     try {
       const { id } = req.params
-      const deletedList = await ListService.deleteListById( id )
+      const { accessToken } = req.cookies
+      const userID = extractUserIdFromToken( accessToken )
+      const deletedList = await ListService.deleteListById( userID, id )
       return res.status( 200 ).json( deletedList )
       
     } catch ( error ) {

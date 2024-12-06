@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import userRouter from './routes/userRoutes.js'
 import { errorMiddleware } from './middlewares/errorMiddleware.js'
+import taskRouter from './routes/taskRoutes.js'
 
 const app = express()
 
@@ -17,6 +18,7 @@ app.use( cookieParser() )
 app.use( cors() )
 
 app.use( '/api/list', listRouter )
+app.use( '/api/task', taskRouter )
 app.use( '/api/auth', authRouter )
 app.use( '/api/user', userRouter )
 

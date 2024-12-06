@@ -1,10 +1,10 @@
-import { Schema, model } from 'mongoose'
-import { Task } from './Task.js'
+import { Schema, model, Types } from 'mongoose'
 
 const List = new Schema( {
   
+  userID: { type: String, require: true },
   title: { type: String, required: true },
-  tasks: [ Task ]
+  tasks: [ { type: Types.ObjectId, ref: 'Task' } ]
   
 } )
 

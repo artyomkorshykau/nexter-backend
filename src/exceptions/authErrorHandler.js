@@ -16,6 +16,10 @@ class AuthErrorHandler extends Error {
     return new AuthErrorHandler( 401, [], 'Пользователь не авторизован' )
   }
   
+  static InvalidToken() {
+    return new AuthErrorHandler( 401, [], 'Неверный токен или просрочен' )
+  }
+  
   static Authorized() {
     return new AuthErrorHandler( 403, [], 'Пользователь авторизован' )
   }
