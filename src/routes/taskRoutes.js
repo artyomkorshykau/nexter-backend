@@ -1,5 +1,4 @@
 import Router from 'express'
-import ListController from '../controllers/listController.js'
 import authMiddleware from '../middlewares/authMiddleware.js'
 import TaskController from '../controllers/taskController.js'
 

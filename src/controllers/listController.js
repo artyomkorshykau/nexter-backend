@@ -1,6 +1,4 @@
 import ListService from '../services/listService.js'
-import AuthErrorHandler from '../exceptions/authErrorHandler.js'
-import ListErrorHandler from '../exceptions/listErrorHandler.js'
 import { extractUserIdFromToken } from '../utils/helpers/extractUserIdFromToken.js'
 
 class ListController {

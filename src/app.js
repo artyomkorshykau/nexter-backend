@@ -30,7 +30,7 @@ const serverApp = async() => {
     
     await connect( process.env.DB_URL )
       .then( () => 'MongoDB is connected!' )
-      .catch( ( err ) => 'MongoDB connected error' )
+      .catch( () => 'MongoDB connected error' )
     
     app.listen( process.env.PORT || 5000, () => {
       
