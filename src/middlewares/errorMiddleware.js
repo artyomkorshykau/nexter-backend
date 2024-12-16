@@ -1,6 +1,5 @@
 import AuthErrorHandler from '../exceptions/authErrorHandler.js'
 import ListErrorHandler from '../exceptions/listErrorHandler.js'
-import { logger } from '../utils/logs/logger.js'
 
 export function errorMiddleware(error, req, res, next) {
   console.log(error)
