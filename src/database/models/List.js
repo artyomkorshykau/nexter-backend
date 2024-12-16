@@ -6,4 +6,11 @@ const List = new Schema({
   tasks: [{ type: Types.ObjectId, ref: 'Task' }],
 })
 
+List.set('toJSON', {
+  transform: (doc, ret) => {
+    delete ret.__v
+    return ret
+  },
+})
+
 export default model('List', List)

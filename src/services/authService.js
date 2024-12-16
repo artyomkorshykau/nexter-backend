@@ -1,7 +1,7 @@
-import User from '../models/User.js'
 import bcrypt from 'bcryptjs'
 import AuthErrorHandler from '../exceptions/authErrorHandler.js'
 import TokenService from './tokenService.js'
+import User from '../database/models/User.js'
 
 class AuthService {
   async register(username, password) {

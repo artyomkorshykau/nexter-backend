@@ -6,4 +6,11 @@ const Task = new Schema({
   title: { type: String, required: true },
 })
 
+Task.set('toJSON', {
+  transform: (doc, ret) => {
+    delete ret.__v
+    return ret
+  },
+})
+
 export default model('Task', Task)

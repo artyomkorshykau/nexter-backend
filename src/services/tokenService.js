@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import Token from '../models/Token.js'
+import Token from '../database/models/Token.js'
 
 class TokenService {
   generateAccessToken(userID) {

@@ -1,5 +1,6 @@
-import List from '../models/List.js'
 import ListErrorHandler from '../exceptions/listErrorHandler.js'
+import List from '../database/models/List.js'
+import mongoose from 'mongoose'
 
 class ListService {
   async createList(userID, title) {
@@ -9,19 +10,22 @@ class ListService {
   }
 
   async getLists(userID) {
-    return List.find({ userID }).populate('tasks')
+    return await List.find({ userID }).populate('tasks')
   }
 
-  async getListById(userID, id) {
-    return List.findById(userID, id)
+  async getListById(userID, listID) {
+    if (!mongoose.Types.ObjectId.isValid(listID)) throw ListErrorHandler.ListNotFound()
+    return await List.findOne({ userID, _id: listID })
   }
 
-  async updateListById(userID, id, list) {
-    return List.findByIdAndUpdate(userID, id, list, { new: true })
+  async updateListById(userID, listID, list) {
+    if (!mongoose.Types.ObjectId.isValid(listID)) throw ListErrorHandler.ListNotFound()
+    return await List.findOneAndUpdate({ userID, _id: listID }, list, { new: true })
   }
 
-  async deleteListById(userID, id) {
-    return List.findByIdAndDelete(userID, id)
+  async deleteListById(userID, listID) {
+    if (!mongoose.Types.ObjectId.isValid(listID)) throw ListErrorHandler.ListNotFound()
+    return await List.findOneAndDelete({ userID, _id: listID })
   }
 }
 

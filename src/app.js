@@ -3,7 +3,7 @@ import config from './config.js'
 import { applyMiddlewares } from './middlewares/index.js'
 import { loadRoutes } from './routes/index.js'
 import { errorMiddleware } from './middlewares/errorMiddleware.js'
-import { connectDB } from './database.js'
+import { connectDB } from './database/database.js'
 import { logger } from './utils/logs/logger.js'
 
 const app = express()

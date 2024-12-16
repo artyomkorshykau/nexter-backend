@@ -28,10 +28,10 @@ class ListController {
 
   async getListById(req, res, next) {
     try {
-      const { id } = req.params
+      const { listID } = req.params
       const { accessToken } = req.cookies
       const userID = extractUserIdFromToken(accessToken)
-      const listById = await ListService.getListById(userID, id)
+      const listById = await ListService.getListById(userID, listID)
       return res.status(200).json(listById)
     } catch (error) {
       next(error)
@@ -52,10 +52,10 @@ class ListController {
 
   async deleteListById(req, res, next) {
     try {
-      const { id } = req.params
+      const { listID } = req.params
       const { accessToken } = req.cookies
       const userID = extractUserIdFromToken(accessToken)
-      const deletedList = await ListService.deleteListById(userID, id)
+      const deletedList = await ListService.deleteListById(userID, listID)
       return res.status(200).json(deletedList)
     } catch (error) {
       next(error)

@@ -27,10 +27,15 @@
     "helmet": "^8.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.2",
     "nodemon": "^3.1.7",
-    "prettier": "3.4.2"
+    "prettier": "3.4.2",
+    "supertest": "^7.0.0"
   }
 }

@@ -28,8 +28,11 @@ class TaskController {
 
   async deleteTaskById(req, res, next) {
     try {
-      const { userID, listID, _id } = req.body
-      await TaskService.deleteTaskById(userID, listID, _id)
+      const { listID, taskID } = req.params
+      console.log(listID, taskID)
+      const { accessToken } = req.cookies
+      const userID = extractUserIdFromToken(accessToken)
+      await TaskService.deleteTaskById(userID, listID, taskID)
 
       return res.status(200).json({ success: true })
     } catch (error) {

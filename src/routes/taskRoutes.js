@@ -6,6 +6,6 @@ const taskRouter = new Router()
 
 taskRouter.post('/create', authMiddleware, TaskController.createTask)
 taskRouter.put('/update', authMiddleware, TaskController.updateTaskById)
-taskRouter.delete('/delete', authMiddleware, TaskController.deleteTaskById)
+taskRouter.delete('/delete/:listID/:taskID', authMiddleware, TaskController.deleteTaskById)
 
 export default taskRouter
