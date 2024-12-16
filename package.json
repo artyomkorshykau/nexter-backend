@@ -6,7 +6,8 @@
   "main": "src/app.js",
   "scripts": {
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,scss,json,md}\"",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/app.js",
+    "build": "echo 'No build step required'"
   },
   "keywords": [
     "task-organaizer",
