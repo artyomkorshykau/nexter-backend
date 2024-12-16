@@ -1,6 +1,7 @@
 import { authDocs } from './schemas/auth.js'
 import { listDocs } from './schemas/list.js'
 import { taskDocs } from './schemas/task.js'
+import { userDocs } from './schemas/user.js'
 
 const swaggerDocument = {
   openapi: '3.0.0',
@@ -28,6 +29,7 @@ const swaggerDocument = {
     ...authDocs,
     ...listDocs,
     ...taskDocs,
+    ...userDocs,
   },
 }
 

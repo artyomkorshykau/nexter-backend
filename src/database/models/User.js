@@ -5,4 +5,12 @@ const User = new Schema({
   password: { type: String, required: true },
 })
 
+User.set('toJSON', {
+  transform: (doc, ret) => {
+    delete ret.__v
+    delete ret.password
+    return ret
+  },
+})
+
 export default model('User', User)
