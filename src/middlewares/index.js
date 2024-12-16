@@ -4,7 +4,6 @@ import cors from 'cors'
 import helmet from 'helmet'
 import documentSwagger from '../../src/docs/swagger.js'
 import swaggerUi from 'swagger-ui-express'
-import path from 'path'
 
 export const applyMiddlewares = app => {
   app.use((req, res, next) => {
@@ -29,6 +28,5 @@ export const applyMiddlewares = app => {
   app.use(express.json())
   app.use(cookieParser())
   app.use(cors())
-  app.use('/docs', express.static(path.join(__dirname, 'public', 'swagger-ui')))
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(documentSwagger))
 }
