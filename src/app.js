@@ -10,19 +10,24 @@ const app = express()
 
 applyMiddlewares(app)
 loadRoutes(app)
-
 app.use(errorMiddleware)
 
-const serverApp = async () => {
-  try {
-    await connectDB(config.dbUrl)
+let isDBConnected = false
 
-    app.listen(config.port, () => {
-      logger.info(`Sever start on port: ${config.port}!`)
-    })
-  } catch (error) {
-    logger.error('ERROR STARTING SERVER!!!')
+const connectToDB = async () => {
+  if (!isDBConnected) {
+    await connectDB(config.dbUrl)
+    logger.info('Database connected successfully!')
+    isDBConnected = true
   }
 }
 
-serverApp()
+export default async function handler(req, res) {
+  try {
+    await connectToDB()
+    return app(req, res)
+  } catch (error) {
+    logger.error('Server error:', error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
