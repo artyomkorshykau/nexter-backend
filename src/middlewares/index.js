@@ -6,6 +6,14 @@ import documentSwagger from '../../src/docs/swagger.js'
 import swaggerUi from 'swagger-ui-express'
 
 export const applyMiddlewares = app => {
+  app.use((req, res, next) => {
+    res.setHeader(
+      'Content-Security-Policy',
+      "default-src 'self'; frame-src 'self' https://vercel.live;",
+    )
+    next()
+  })
+
   app.use(
     helmet({
       contentSecurityPolicy: {
