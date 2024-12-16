@@ -22,7 +22,7 @@ const swaggerDocument = {
   },
   servers: [
     {
-      url: 'http://localhost:5000/api',
+      url: 'https://nexter-backend.vercel.app',
     },
   ],
   paths: {
