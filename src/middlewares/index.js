@@ -6,7 +6,17 @@ import documentSwagger from '../../src/docs/swagger.js'
 import swaggerUi from 'swagger-ui-express'
 
 export const applyMiddlewares = app => {
-  app.use(helmet({ hidePoweredBy: { setTo: 'Spring' } }))
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", 'https://vercel.live'],
+          connectSrc: ["'self'", 'https://vercel.live'],
+        },
+      },
+    }),
+  )
   app.use(express.json())
   app.use(cookieParser())
   app.use(cors())
