@@ -22,15 +22,21 @@ class AuthErrorHandler extends Error {
   }
 
   static IncorrectPassword() {
-    return new AuthErrorHandler(401, [], 'Неверный пароль.')
+    return new AuthErrorHandler(401, [], {
+      password: 'Неверный пароль.',
+    })
   }
 
   static UserExist(username) {
-    return new AuthErrorHandler(400, [], `Пользователь ${username} уже зарегистрирован.`)
+    return new AuthErrorHandler(400, [], {
+      username: `Пользователь ${username} уже зарегистрирован.`,
+    })
   }
 
   static UserNotFound(username) {
-    return new AuthErrorHandler(400, [], `Пользователь ${username} не найден.`)
+    return new AuthErrorHandler(400, [], {
+      username: `Пользователь ${username} не найден.`,
+    })
   }
 
   static BadRequest(message, errors = []) {
