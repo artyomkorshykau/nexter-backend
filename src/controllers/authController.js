@@ -6,12 +6,10 @@ class AuthController {
       const { username, password } = req.body
       const token = await AuthService.register(username, password)
       const lifeTime = 30 * 24 * 60 * 60 * 1000
-      const expires = new Date(Date.now() + lifeTime)
       res.cookie('accessToken', token, {
-        maxAge: expires,
+        maxAge: lifeTime,
         httpOnly: true,
-        secure: true,
-        domain: 'nexter-backend.vercel.app',
+        secure: false,
       })
 
       return res.status(200).json({ success: true, token })
@@ -27,12 +25,10 @@ class AuthController {
 
       const token = await AuthService.login(username, password, accessToken)
       const lifeTime = 30 * 24 * 60 * 60 * 1000
-      const expires = new Date(Date.now() + lifeTime)
       res.cookie('accessToken', token, {
-        maxAge: expires,
+        maxAge: lifeTime,
         httpOnly: true,
-        secure: true,
-        domain: 'nexter-backend.vercel.app',
+        secure: false,
       })
 
       return res.status(200).json({ success: true, token })
