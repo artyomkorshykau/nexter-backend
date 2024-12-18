@@ -28,15 +28,17 @@ class AuthErrorHandler extends Error {
   }
 
   static UserExist(username) {
-    return new AuthErrorHandler(400, [], {
+    const message = JSON.stringify({
       username: `Пользователь ${username} уже зарегистрирован.`,
     })
+    return new AuthErrorHandler(400, [], message)
   }
 
   static UserNotFound(username) {
-    return new AuthErrorHandler(400, [], {
+    const message = JSON.stringify({
       username: `Пользователь ${username} не найден.`,
     })
+    return new AuthErrorHandler(400, [], message)
   }
 
   static BadRequest(message, errors = []) {
