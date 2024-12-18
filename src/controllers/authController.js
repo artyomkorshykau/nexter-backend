@@ -10,7 +10,7 @@ class AuthController {
         maxAge: lifeTime,
         httpOnly: true,
         secure: false,
-        sameSite: 'lax',
+        sameSite: 'none',
       })
 
       return res.status(200).json({ success: true, token })
@@ -30,7 +30,7 @@ class AuthController {
         maxAge: lifeTime,
         httpOnly: true,
         secure: false,
-        sameSite: 'lax',
+        sameSite: 'none',
       })
 
       return res.status(200).json({ success: true, token })
