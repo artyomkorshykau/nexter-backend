@@ -18,7 +18,7 @@ const swaggerDocument = {
   info: {
     title: 'Nexter API',
     version: '1.0.0',
-    description: 'Документация для Nexter',
+    description: 'Created by Artyom Korshykau',
   },
   servers: [
     {
