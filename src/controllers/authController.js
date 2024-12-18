@@ -9,7 +9,7 @@ class AuthController {
       res.cookie('accessToken', token, {
         maxAge: lifeTime,
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: 'none',
       })
 
