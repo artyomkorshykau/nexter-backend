@@ -7,6 +7,7 @@ class AuthErrorHandler extends Error {
 
     this.status = status
     this.errors = errors
+    this.message = message
   }
 
   static Unauthorized() {
@@ -22,23 +23,15 @@ class AuthErrorHandler extends Error {
   }
 
   static IncorrectPassword() {
-    return new AuthErrorHandler(401, [], {
-      password: 'Неверный пароль.',
-    })
+    return new AuthErrorHandler(401, [], { password: 'Неверный пароль.' })
   }
 
   static UserExist(username) {
-    const message = JSON.stringify({
-      username: `Пользователь ${username} уже зарегистрирован.`,
-    })
-    return new AuthErrorHandler(400, [], message)
+    return new AuthErrorHandler(400, [], `Пользователь ${username} уже зарегистрирован.`)
   }
 
   static UserNotFound(username) {
-    const message = JSON.stringify({
-      username: `Пользователь ${username} не найден.`,
-    })
-    return new AuthErrorHandler(400, [], message)
+    return new AuthErrorHandler(400, [], `Пользователь ${username} не найден.`)
   }
 
   static BadRequest(message, errors = []) {
